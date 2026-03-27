@@ -50,7 +50,7 @@ export default function WaitlistForm() {
     setStatus('loading')
 
     try {
-      fetch(APPS_SCRIPT_URL, {
+      await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
@@ -59,7 +59,6 @@ export default function WaitlistForm() {
           dataHora: new Date().toLocaleString('pt-BR'),
         }),
       })
-      await new Promise(resolve => setTimeout(resolve, 500))
       setStatus('success')
     } catch {
       setStatus('error')
