@@ -1,5 +1,5 @@
 interface SelectFieldProps {
-  label: string
+  label?: string
   id: string
   value: string
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
@@ -21,9 +21,11 @@ export default function SelectField({
 }: SelectFieldProps) {
   return (
     <div className="flex flex-col gap-1">
-      <label htmlFor={id} className="text-sm font-semibold text-foreground/80">
-        {label} {required && <span className="text-primary">*</span>}
-      </label>
+      {label && (
+        <label htmlFor={id} className="text-sm font-semibold text-foreground/80">
+          {label} {required && <span className="text-primary">*</span>}
+        </label>
+      )}
       <select
         id={id}
         value={value}

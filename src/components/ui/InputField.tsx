@@ -1,5 +1,5 @@
 interface InputFieldProps {
-  label: string
+  label?: string
   id: string
   type?: string
   placeholder?: string
@@ -21,9 +21,11 @@ export default function InputField({
 }: InputFieldProps) {
   return (
     <div className="flex flex-col gap-1">
-      <label htmlFor={id} className="text-sm font-semibold text-foreground/80">
-        {label} {required && <span className="text-primary">*</span>}
-      </label>
+      {label && (
+        <label htmlFor={id} className="text-sm font-semibold text-foreground/80">
+          {label} {required && <span className="text-primary">*</span>}
+        </label>
+      )}
       <input
         id={id}
         type={type}

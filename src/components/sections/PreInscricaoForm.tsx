@@ -99,11 +99,11 @@ export default function PreInscricaoForm() {
   }
 
   const textFields = [
-    { field: 'nome' as const, label: 'Nome', type: 'text', placeholder: 'Seu nome completo' },
-    { field: 'email' as const, label: 'E-mail', type: 'email', placeholder: 'seu@email.com' },
-    { field: 'whatsapp' as const, label: 'WhatsApp (com DDD)', type: 'tel', placeholder: '(00) 00000-0000' },
-    { field: 'instagram' as const, label: 'Qual @ do seu Instagram?', type: 'text', placeholder: '@seuinstagram' },
-    { field: 'especialidade' as const, label: 'Qual sua especialidade médica?', type: 'text', placeholder: 'Ex: Cardiologia, Dermatologia...' },
+    { field: 'nome' as const, type: 'text', placeholder: 'Nome' },
+    { field: 'email' as const, type: 'email', placeholder: 'E-mail' },
+    { field: 'whatsapp' as const, type: 'tel', placeholder: 'WhatsApp (com DDD)' },
+    { field: 'instagram' as const, type: 'text', placeholder: 'Qual @ do seu Instagram?' },
+    { field: 'especialidade' as const, type: 'text', placeholder: 'Qual sua especialidade médica?' },
   ]
 
   return (
@@ -113,11 +113,10 @@ export default function PreInscricaoForm() {
       initial="hidden"
       animate="visible"
     >
-      {textFields.map(({ field, label, type, placeholder }, i) => (
+      {textFields.map(({ field, type, placeholder }, i) => (
         <motion.div key={field} custom={i} variants={fadeUp}>
           <InputField
             id={field}
-            label={label}
             type={type}
             placeholder={placeholder}
             value={form[field]}
@@ -131,8 +130,8 @@ export default function PreInscricaoForm() {
       <motion.div custom={5} variants={fadeUp}>
         <SelectField
           id="faturamento"
-          label="Qual sua faixa de faturamento atual?"
           value={form.faturamento}
+          placeholder="Qual sua faixa de faturamento atual?"
           onChange={handleChange('faturamento')}
           options={FATURAMENTO_OPTIONS}
           error={errors.faturamento}
@@ -143,9 +142,8 @@ export default function PreInscricaoForm() {
       <motion.div custom={6} variants={fadeUp}>
         <InputField
           id="clinica"
-          label="Você possui clínica? Se sim, quantos profissionais de saúde?"
           type="text"
-          placeholder="Ex: Sim, 5 profissionais"
+          placeholder="Você possui clínica? Se sim, quantos profissionais de saúde?"
           value={form.clinica}
           onChange={handleChange('clinica')}
           error={errors.clinica}
