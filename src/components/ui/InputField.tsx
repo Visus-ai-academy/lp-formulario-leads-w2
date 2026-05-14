@@ -5,8 +5,10 @@ interface InputFieldProps {
   placeholder?: string
   value: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
   error?: string
   required?: boolean
+  autoFocus?: boolean
 }
 
 export default function InputField({
@@ -16,8 +18,10 @@ export default function InputField({
   placeholder,
   value,
   onChange,
+  onKeyDown,
   error,
   required,
+  autoFocus,
 }: InputFieldProps) {
   return (
     <div className="flex flex-col gap-1">
@@ -32,7 +36,9 @@ export default function InputField({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        onKeyDown={onKeyDown}
         required={required}
+        autoFocus={autoFocus}
         className={`
           w-full rounded-lg px-4 py-3 text-sm font-normal
           bg-white/5 border text-foreground placeholder:text-foreground/30
