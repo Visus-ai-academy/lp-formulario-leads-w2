@@ -7,7 +7,7 @@ export default function ThankYouPage() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
       className="min-h-screen flex flex-col items-center justify-center gap-6 bg-cover bg-center bg-no-repeat px-6 text-center"
-      style={{ backgroundImage: "url('assets/bg-obrigado.webp')" }}
+      style={{ backgroundImage: "url('/assets/bg-obrigado.webp')" }}
     >
       <style>{`
         .cta-obrigado {
@@ -27,7 +27,7 @@ export default function ThankYouPage() {
       `}</style>
 
       <img
-        src="assets/logo-w2.svg"
+        src="/assets/logo-w2.svg"
         alt="W2 Club"
         className="h-14 brightness-0 invert drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] mb-6"
       />

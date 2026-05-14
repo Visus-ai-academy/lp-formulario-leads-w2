@@ -8,11 +8,11 @@ export default function HeroSection() {
     >
       <div
         className="absolute inset-0 bg-cover bg-[17%_top] bg-no-repeat md:hidden"
-        style={{ backgroundImage: "url('assets/w2-hero-mobile.webp')" }}
+        style={{ backgroundImage: "url('/assets/w2-hero-mobile.webp')" }}
       />
       <div
         className="absolute inset-0 bg-cover bg-[center_top] bg-no-repeat hidden md:block"
-        style={{ backgroundImage: "url('assets/bg-alexandre.webp')" }}
+        style={{ backgroundImage: "url('/assets/bg-alexandre.webp')" }}
       />
       <div className="absolute inset-0 bg-black/60 md:bg-transparent" />
       <div className="relative z-10 w-full md:w-[37.5vw] max-w-lg md:max-w-none mr-0 md:mr-[9vw] px-6 md:px-8 py-16 md:py-12">
