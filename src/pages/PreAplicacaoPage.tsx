@@ -40,8 +40,8 @@ export default function PreAplicacaoPage() {
             transition={{ duration: 0.5 }}
             className="text-3xl sm:text-4xl md:text-[2.4vw] font-bold text-foreground leading-tight mb-4"
           >
-            O ambiente que todo<br />médico procura para<br />
-            <span className="text-primary">acelerar seus resultados!</span>
+            O W2 Club é uma comunidade<br />exclusiva focada em médicos<br />que buscam escala,<br />networking de alto nível e<br />
+            <span className="text-primary">troca de experiências práticas.</span>
           </motion.h1>
 
           <motion.p
@@ -50,8 +50,7 @@ export default function PreAplicacaoPage() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-sm sm:text-base md:text-[1.05vw] font-normal text-foreground/70 leading-relaxed mb-8"
           >
-            Preencha o formulário abaixo e faça sua aplicação para o{' '}
-            <span className="font-semibold text-foreground">W2 Club.</span>
+            Mentorias, encontros presenciais e um ambiente<br />voltado para o crescimento do seu negócio, transformando seus<br />resultados e conhecimentos!
           </motion.p>
 
           <PreAplicacaoForm />

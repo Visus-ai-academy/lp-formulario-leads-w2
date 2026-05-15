@@ -4,7 +4,14 @@ import InputField from '@/components/ui/InputField'
 import RedirectModal from '@/components/ui/RedirectModal'
 
 const APPS_SCRIPT_URL = import.meta.env.VITE_APPS_SCRIPT_URL_PRE_APLICACAO || ''
-const TOTAL_STEPS = 5
+const TOTAL_STEPS = 8
+
+const FATURAMENTO_OPTIONS = [
+  'Até R$ 50.000/mês',
+  'De R$ 50.000 a R$ 100.000/mês',
+  'De R$ 100.000 a R$ 300.000/mês',
+  'Mais de R$ 300.000/mês',
+]
 
 const INVESTIMENTO_OPTIONS = [
   'À vista com R$20.000,00 de desconto',
@@ -38,7 +45,10 @@ function getProgress(step: number): number {
 export default function PreAplicacaoForm() {
   const sessionToken = useRef(generateToken())
   const [step, setStep] = useState(1)
-  const [form, setForm] = useState({ nome: '', email: '', telefone: '', crm: '', investimento: '' })
+  const [form, setForm] = useState({
+    nome: '', email: '', whatsapp: '', instagram: '',
+    especialidade: '', faturamento: '', clinica: '', investimento: '',
+  })
   const [error, setError] = useState('')
   const [showModal, setShowModal] = useState(false)
 
@@ -62,12 +72,21 @@ export default function PreAplicacaoForm() {
       if (!isValidEmail(form.email)) { setError('E-mail inválido'); return }
       sendToSheet({ email: form.email.trim() })
     } else if (step === 3) {
-      if (!form.telefone.trim()) { setError('Telefone é obrigatório'); return }
-      sendToSheet({ telefone: form.telefone.trim() })
+      if (!form.whatsapp.trim()) { setError('WhatsApp é obrigatório'); return }
+      sendToSheet({ whatsapp: form.whatsapp.trim() })
     } else if (step === 4) {
-      if (!form.crm.trim()) { setError('CRM é obrigatório'); return }
-      sendToSheet({ crm: form.crm.trim() })
+      if (!form.instagram.trim()) { setError('Instagram é obrigatório'); return }
+      sendToSheet({ instagram: form.instagram.trim() })
     } else if (step === 5) {
+      if (!form.especialidade.trim()) { setError('Especialidade é obrigatória'); return }
+      sendToSheet({ especialidade: form.especialidade.trim() })
+    } else if (step === 6) {
+      if (!form.faturamento) { setError('Selecione uma opção para continuar'); return }
+      sendToSheet({ faturamento: form.faturamento })
+    } else if (step === 7) {
+      if (!form.clinica.trim()) { setError('Este campo é obrigatório'); return }
+      sendToSheet({ clinica: form.clinica.trim() })
+    } else if (step === 8) {
       if (!form.investimento) { setError('Selecione uma opção para continuar'); return }
       sendToSheet({ investimento: form.investimento })
       setShowModal(true)
@@ -142,13 +161,13 @@ export default function PreAplicacaoForm() {
 
           {step === 3 && (
             <InputField
-              id="telefone"
-              label="Telefone"
+              id="whatsapp"
+              label="WhatsApp (com DDD)"
               type="tel"
               placeholder="(00) 00000-0000"
-              value={form.telefone}
+              value={form.whatsapp}
               onChange={e => {
-                setForm(p => ({ ...p, telefone: applyPhoneMask(e.target.value) }))
+                setForm(p => ({ ...p, whatsapp: applyPhoneMask(e.target.value) }))
                 setError('')
               }}
               onKeyDown={handleKey}
@@ -160,12 +179,12 @@ export default function PreAplicacaoForm() {
 
           {step === 4 && (
             <InputField
-              id="crm"
-              label="CRM"
+              id="instagram"
+              label="Qual seu @ do Instagram"
               type="text"
-              placeholder="Número do seu CRM"
-              value={form.crm}
-              onChange={e => { setForm(p => ({ ...p, crm: e.target.value })); setError('') }}
+              placeholder="@seu.perfil"
+              value={form.instagram}
+              onChange={e => { setForm(p => ({ ...p, instagram: e.target.value })); setError('') }}
               onKeyDown={handleKey}
               error={error}
               required
@@ -174,6 +193,63 @@ export default function PreAplicacaoForm() {
           )}
 
           {step === 5 && (
+            <InputField
+              id="especialidade"
+              label="Qual sua especialidade médica?"
+              type="text"
+              placeholder="Ex: Cardiologia, Dermatologia..."
+              value={form.especialidade}
+              onChange={e => { setForm(p => ({ ...p, especialidade: e.target.value })); setError('') }}
+              onKeyDown={handleKey}
+              error={error}
+              required
+              autoFocus
+            />
+          )}
+
+          {step === 6 && (
+            <div className="flex flex-col gap-3">
+              <p className="text-sm font-semibold text-foreground">
+                Qual sua faixa de faturamento atual?
+              </p>
+              <div className="flex flex-col gap-2">
+                {FATURAMENTO_OPTIONS.map(option => (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() => { setForm(p => ({ ...p, faturamento: option })); setError('') }}
+                    className={`
+                      w-full text-left px-4 py-3 rounded-lg text-sm border transition-all duration-200
+                      ${form.faturamento === option
+                        ? 'bg-primary/20 border-primary text-foreground font-medium'
+                        : 'bg-white/5 border-white/20 text-foreground/70 hover:border-white/40 hover:bg-white/8'
+                      }
+                    `}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+              {error && <span className="text-xs text-red-400">{error}</span>}
+            </div>
+          )}
+
+          {step === 7 && (
+            <InputField
+              id="clinica"
+              label="Você possui clínica? Se sim, quantos profissionais de saúde?"
+              type="text"
+              placeholder="Ex: Sim, 5 profissionais / Não"
+              value={form.clinica}
+              onChange={e => { setForm(p => ({ ...p, clinica: e.target.value })); setError('') }}
+              onKeyDown={handleKey}
+              error={error}
+              required
+              autoFocus
+            />
+          )}
+
+          {step === 8 && (
             <div className="flex flex-col gap-3">
               <p className="text-sm text-foreground/70 leading-relaxed">
                 O W2 Club é um grupo seleto para médicos que querem mais do que simplesmente

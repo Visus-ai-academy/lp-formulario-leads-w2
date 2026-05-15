@@ -8,17 +8,20 @@
 var SPREADSHEET_ID = '17DPzWjF6QdTSKpVK5bppR8Di8wDSEaHaHXKnrbCskSw'
 var SHEET_NAME = 'Respostas'
 
-var HEADERS = ['DataHora', 'SessionToken', 'Nome', 'Email', 'Telefone', 'CRM', 'Investimento']
+var HEADERS = ['DataHora', 'SessionToken', 'Nome', 'Email', 'Whatsapp', 'Instagram', 'Especialidade', 'Faturamento', 'Clinica', 'Investimento']
 
 // Índices das colunas (1-based)
 var COL = {
-  dataHora:     1,
-  sessionToken: 2,
-  nome:         3,
-  email:        4,
-  telefone:     5,
-  crm:          6,
-  investimento: 7,
+  dataHora:      1,
+  sessionToken:  2,
+  nome:          3,
+  email:         4,
+  whatsapp:      5,
+  instagram:     6,
+  especialidade: 7,
+  faturamento:   8,
+  clinica:       9,
+  investimento:  10,
 }
 
 function getOrCreateSheet() {
@@ -57,21 +60,27 @@ function doPost(e) {
     if (row === -1) {
       // Primeira chegada deste token — cria linha nova
       var newRow = new Array(HEADERS.length).fill('')
-      newRow[COL.dataHora - 1]     = new Date().toLocaleString('pt-BR')
-      newRow[COL.sessionToken - 1] = token
-      if (data.nome)         newRow[COL.nome - 1]         = data.nome
-      if (data.email)        newRow[COL.email - 1]        = data.email
-      if (data.telefone)     newRow[COL.telefone - 1]     = data.telefone
-      if (data.crm)          newRow[COL.crm - 1]          = data.crm
-      if (data.investimento) newRow[COL.investimento - 1] = data.investimento
+      newRow[COL.dataHora - 1]      = new Date().toLocaleString('pt-BR')
+      newRow[COL.sessionToken - 1]  = token
+      if (data.nome)          newRow[COL.nome - 1]          = data.nome
+      if (data.email)         newRow[COL.email - 1]         = data.email
+      if (data.whatsapp)      newRow[COL.whatsapp - 1]      = data.whatsapp
+      if (data.instagram)     newRow[COL.instagram - 1]     = data.instagram
+      if (data.especialidade) newRow[COL.especialidade - 1] = data.especialidade
+      if (data.faturamento)   newRow[COL.faturamento - 1]   = data.faturamento
+      if (data.clinica)       newRow[COL.clinica - 1]       = data.clinica
+      if (data.investimento)  newRow[COL.investimento - 1]  = data.investimento
       sheet.appendRow(newRow)
     } else {
       // Linha já existe — atualiza apenas os campos enviados
-      if (data.nome         !== undefined) sheet.getRange(row, COL.nome).setValue(data.nome)
-      if (data.email        !== undefined) sheet.getRange(row, COL.email).setValue(data.email)
-      if (data.telefone     !== undefined) sheet.getRange(row, COL.telefone).setValue(data.telefone)
-      if (data.crm          !== undefined) sheet.getRange(row, COL.crm).setValue(data.crm)
-      if (data.investimento !== undefined) sheet.getRange(row, COL.investimento).setValue(data.investimento)
+      if (data.nome          !== undefined) sheet.getRange(row, COL.nome).setValue(data.nome)
+      if (data.email         !== undefined) sheet.getRange(row, COL.email).setValue(data.email)
+      if (data.whatsapp      !== undefined) sheet.getRange(row, COL.whatsapp).setValue(data.whatsapp)
+      if (data.instagram     !== undefined) sheet.getRange(row, COL.instagram).setValue(data.instagram)
+      if (data.especialidade !== undefined) sheet.getRange(row, COL.especialidade).setValue(data.especialidade)
+      if (data.faturamento   !== undefined) sheet.getRange(row, COL.faturamento).setValue(data.faturamento)
+      if (data.clinica       !== undefined) sheet.getRange(row, COL.clinica).setValue(data.clinica)
+      if (data.investimento  !== undefined) sheet.getRange(row, COL.investimento).setValue(data.investimento)
     }
 
     return jsonResponse({ status: 'ok' })
