@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp \"D:/Projetos/Imersão Clínica/projeto/public/assets/hero-imersao.webp\" \"D:/Projetos/W2 Club/lp-formulario-leads-w2/public/assets/\")",
+      "Bash(cp \"D:/Projetos/Imersão Clínica/projeto/public/assets/hero-mobile.webp\" \"D:/Projetos/W2 Club/lp-formulario-leads-w2/public/assets/\")",
+      "Bash(cp \"D:/Projetos/Imersão Clínica/projeto/public/assets/img-alexandre.webp\" \"D:/Projetos/W2 Club/lp-formulario-leads-w2/public/assets/\")",
+      "Bash(cp \"D:/Projetos/Imersão Clínica/projeto/public/assets/img-clinic.webp\" \"D:/Projetos/W2 Club/lp-formulario-leads-w2/public/assets/\")",
+      "Bash(cp \"D:/Projetos/Imersão Clínica/projeto/public/assets/img-clinic-mobile.webp\" \"D:/Projetos/W2 Club/lp-formulario-leads-w2/public/assets/\")",
+      "Bash(mkdir -p \"D:/Projetos/W2 Club/lp-formulario-leads-w2/src/lib\")",
+      "Bash(cp \"D:/Projetos/Imersão Clínica/projeto/src/lib/smoothScroll.ts\" \"D:/Projetos/W2 Club/lp-formulario-leads-w2/src/lib/\")",
+      "Bash(cp \"D:/Projetos/Imersão Clínica/projeto/src/lib/utils.ts\" \"D:/Projetos/W2 Club/lp-formulario-leads-w2/src/lib/\")",
+      "Bash(npm run *)"
+    ]
+  }
+}
