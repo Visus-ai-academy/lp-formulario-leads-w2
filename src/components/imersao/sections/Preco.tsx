@@ -144,6 +144,7 @@ export function Preco() {
             <ProgressBar percent={56} />
 
             <a
+              id="bt_checkout"
               href="https://pay.kiwify.com.br/tKfzOmZ"
               target="_blank"
               rel="noopener noreferrer"
